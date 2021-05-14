@@ -137,7 +137,7 @@ By default, the "release" variant will be used for publishing. Optionally, a spe
 
 ```groovy
 mavenPublish {
-  androidVariantToPublish = "demoDebug"  // or use project.property('PUBLISH_VARIANT'), etc.
+  androidVariantToPublish = "demoDebug" // defaults to release
 }
 ```
 
