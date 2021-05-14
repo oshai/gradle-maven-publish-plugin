@@ -115,30 +115,20 @@ signing.secretKeyRingFile=/Users/yourusername/.gnupg/secring.gpg
 It's best to place them inside your home directory, `$HOME/.gradle/gradle.properties`. You can find more information
 about these properties in [Gradle's documentaion](https://docs.gradle.org/current/userguide/signing_plugin.html#sec:signatory_credentials).
 
-In case you want to use in memory signing keys, which works great for CI, you can specify them like this instead:
-```properties
-signingInMemoryKey=exported_ascii_armored_key
+In case you want to use in memory signing keys, which works great for CI, you can create these environment variables instead:
+```
+export ORG_GRADLE_PROJECT_signingInMemoryKey=exported_ascii_armored_key
+export ORG_GRADLE_PROJECT_signingInMemoryPassword=secret
 # Optional.
-signingInMemoryKeyId=24875D73
-# If key was created with a password.
-signingInMemoryPassword=secret
+export ORG_GRADLE_PROJECT_signingInMemoryKeyId=24875D73
 ```
 
-These properties can also be provided as environment variables by prefixing them with `ORG_GRADLE_PROJECT_`
-
-It is possible to disable signing of release artifacts directly in your build scripts (takes precedence):
+It is possible to disable signing of release artifacts directly in your build scripts:
 
 ```groovy
 mavenPublish {
-  releaseSigningEnabled = false
+  releaseSigningEnabled = false // defaults to RELEASE_SIGNING_ENABLED Gradle property or true
 }
-```
-
-Alternatively, you can use a Gradle property which is recommended if you only want to sign certain builds
-or only build on certain machines.
-
-```groovy
-RELEASE_SIGNING_ENABLED=false
 ```
 
 ### Android Variants
